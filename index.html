@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f43f85">
+  <meta name="description" content="AIbazAR: productos útiles, buenos precios y compras fáciles.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>AIbazAR — Todo lo que buscás, a un toque</title>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="AIbazAR inicio"><span class="bag">♡</span><span>AIbaz<span class="pink">AR</span></span></a>
+  <button id="installBtn" class="install hidden">Instalar app</button>
+  <button id="cartToggle" class="cart-button" aria-label="Abrir carrito">🛒 <span id="cartCount">0</span></button>
+</header>
+<main>
+  <section class="hero">
+    <span class="eyebrow">TU TIENDA ONLINE</span>
+    <h1>Todo lo que buscás,<br><em>a un toque.</em></h1>
+    <p>Productos útiles, precios accesibles y una forma fácil de comprar.</p>
+    <a class="primary" href="#catalogo">Explorar productos</a>
+    <div class="hero-bubble bubble-one">♡</div><div class="hero-bubble bubble-two">✦</div>
+  </section>
+  <section class="trust-row">
+    <div>🚚 <span>Envíos a coordinar</span></div><div>♡ <span>Atención personalizada</span></div><div>🏷️ <span>Precios claros en ARS</span></div>
+  </section>
+  <section id="catalogo" class="catalog-section">
+    <div class="section-head"><div><span class="eyebrow">ELEGÍ TUS FAVORITOS</span><h2>Productos destacados</h2></div><span class="count-label" id="productCount"></span></div>
+    <div class="filters" id="filters"></div>
+    <div class="product-grid" id="products"></div>
+  </section>
+  <section class="how">
+    <h2>Comprar es simple</h2>
+    <div class="how-grid"><div><b>01</b><h3>Elegí</h3><p>Sumá tus productos al carrito.</p></div><div><b>02</b><h3>Confirmá</h3><p>Revisá cantidades y tus datos.</p></div><div><b>03</b><h3>Coordiná</h3><p>Confirmamos pago y envío con vos.</p></div></div>
+  </section>
+</main>
+<footer><a class="brand small" href="#"><span>AIbaz<span class="pink">AR</span></span></a><p>Todo lo que buscás, a un toque.</p><small>Catálogo demostrativo · Verificá stock y precios antes de vender.</small></footer>
+<div id="drawerBackdrop" class="backdrop hidden"></div>
+<aside id="cartDrawer" class="drawer" aria-label="Carrito de compras" aria-hidden="true">
+  <div class="drawer-head"><div><span class="eyebrow">TU PEDIDO</span><h2>Mi carrito</h2></div><button id="closeCart" class="close" aria-label="Cerrar carrito">×</button></div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-total"><span>Subtotal estimado</span><strong id="cartTotal">$ 0</strong></div>
+  <p class="tiny">El envío se coordina por separado. Los productos y precios de muestra no representan stock real.</p>
+  <form id="checkoutForm" class="checkout">
+    <label>Tu nombre<input name="name" required placeholder="Nombre y apellido"></label>
+    <label>Localidad / barrio<input name="area" required placeholder="Ej. localidad, provincia"></label>
+    <label>WhatsApp de contacto<input name="phone" required type="tel" placeholder="Código de área + número"></label>
+    <label>Entrega
+      <select name="delivery" required><option value="">Elegí una opción</option><option>Retiro a coordinar</option><option>Envío a domicilio a cotizar</option></select>
+    </label>
+    <button class="primary full" type="submit">Preparar pedido por WhatsApp</button>
+    <p class="tiny">Este prototipo no cobra online ni guarda datos. El pedido se abre en WhatsApp para que lo revises antes de enviarlo.</p>
+  </form>
+</aside>
+<div id="toast" role="status" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
