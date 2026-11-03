@@ -11,12 +11,45 @@ const products = [
 const money = n => new Intl.NumberFormat("es-AR",{style:"currency",currency:"ARS",maximumFractionDigits:0}).format(n);
 let cart = {};
 let activeCategory = "Todos";
+let searchTerm = "";
 const productsEl=document.querySelector("#products"), filtersEl=document.querySelector("#filters");
 const drawer=document.querySelector("#cartDrawer"), backdrop=document.querySelector("#drawerBackdrop");
 const countEl=document.querySelector("#cartCount"), itemsEl=document.querySelector("#cartItems"), totalEl=document.querySelector("#cartTotal");
 function categories(){return ["Todos",...new Set(products.map(p=>p.category))]}
 function renderFilters(){filtersEl.innerHTML=categories().map(c=>`<button class="filter ${c===activeCategory?"active":""}" data-category="${c}">${c}</button>`).join("");filtersEl.querySelectorAll("button").forEach(b=>b.onclick=()=>{activeCategory=b.dataset.category;renderFilters();renderProducts()})}
-function renderProducts(){let list=products.filter(p=>activeCategory==="Todos"||p.category===activeCategory);document.querySelector("#productCount").textContent=`${list.length} productos`;productsEl.innerHTML=list.map(p=>`<article class="product-card"><div class="product-art"><span>${p.emoji}</span><span class="tag">${p.tag}</span></div><div class="product-info"><span class="category">${p.category}</span><h3>${p.name}</h3><p class="description">${p.description}</p><div class="price-row"><span class="price">${money(p.price)}</span>${p.oldPrice?`<span class="old-price">${money(p.oldPrice)}</span>`:""}</div><button class="add-button" data-add="${p.id}">＋ Agregar al carrito</button></div></article>`).join("");productsEl.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>addToCart(Number(b.dataset.add)))}
+function renderProducts(){
+  let list = products.filter(p => {
+    const matchesCategory = activeCategory === "Todos" || p.category === activeCategory;
+    const text = `${p.name} ${p.category} ${p.description}`.toLowerCase();
+    const matchesSearch = text.includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  document.querySelector("#productCount").textContent = `${list.length} productos`;
+
+  productsEl.innerHTML = list.map(p => `
+    <article class="product-card">
+      <div class="product-art">
+        <span>${p.emoji}</span>
+        <span class="tag">${p.tag}</span>
+      </div>
+      <div class="product-info">
+        <span class="category">${p.category}</span>
+        <h3>${p.name}</h3>
+        <p class="description">${p.description}</p>
+        <div class="price-row">
+          <span class="price">${money(p.price)}</span>
+          ${p.oldPrice ? `<span class="old-price">${money(p.oldPrice)}</span>` : ""}
+        </div>
+        <button class="add-button" data-add="${p.id}">＋ Agregar al carrito</button>
+      </div>
+    </article>
+  `).join("");
+
+  productsEl.querySelectorAll("[data-add]").forEach(b =>
+    b.onclick = () => addToCart(Number(b.dataset.add))
+  );
+} productos`;productsEl.innerHTML=list.map(p=>`<article class="product-card"><div class="product-art"><span>${p.emoji}</span><span class="tag">${p.tag}</span></div><div class="product-info"><span class="category">${p.category}</span><h3>${p.name}</h3><p class="description">${p.description}</p><div class="price-row"><span class="price">${money(p.price)}</span>${p.oldPrice?`<span class="old-price">${money(p.oldPrice)}</span>`:""}</div><button class="add-button" data-add="${p.id}">＋ Agregar al carrito</button></div></article>`).join("");productsEl.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>addToCart(Number(b.dataset.add)))}
 function addToCart(id){const p=products.find(p=>p.id===id);const qty=cart[id]||0;if(qty>=p.stock){toast("Stock de demostración agotado");return}cart[id]=qty+1;renderCart();toast("Agregado al carrito")}
 function changeQty(id,d){const p=products.find(p=>p.id===id);let n=(cart[id]||0)+d;if(n<=0)delete cart[id];else if(n<=p.stock)cart[id]=n;else toast("No hay más unidades en el stock de muestra");renderCart()}
 function renderCart(){let ids=Object.keys(cart);let count=ids.reduce((s,id)=>s+cart[id],0);countEl.textContent=count;let total=0;if(!ids.length)itemsEl.innerHTML='<div class="empty">Tu carrito está vacío.<br>¡Agregá algo que te guste! ♡</div>';else itemsEl.innerHTML=ids.map(id=>{let p=products.find(p=>p.id===Number(id));total+=p.price*cart[id];return `<div class="cart-item"><div class="cart-emoji">${p.emoji}</div><div><h4>${p.name}</h4><small>${money(p.price)} c/u</small><div class="qty"><button data-qty="${id}" data-delta="-1" aria-label="Quitar uno">−</button><span>${cart[id]}</span><button data-qty="${id}" data-delta="1" aria-label="Agregar uno">+</button></div></div><strong>${money(p.price*cart[id])}</strong></div>`}).join("");totalEl.textContent=money(total);itemsEl.querySelectorAll("[data-qty]").forEach(b=>b.onclick=()=>changeQty(Number(b.dataset.qty),Number(b.dataset.delta)))}
@@ -27,4 +60,8 @@ let toastTimer;function toast(msg){const el=document.querySelector("#toast");el.
 document.querySelector("#checkoutForm").addEventListener("submit",e=>{e.preventDefault();if(!Object.keys(cart).length){toast("Primero agregá un producto");return}const form=new FormData(e.currentTarget);const lines=Object.keys(cart).map(id=>{let p=products.find(p=>p.id===Number(id));return `• ${p.name} x${cart[id]} — ${money(p.price*cart[id])}`});const total=Object.keys(cart).reduce((s,id)=>s+products.find(p=>p.id===Number(id)).price*cart[id],0);const msg=`Hola, quiero consultar por este pedido de AIbazAR:\n\n${lines.join("\n")}\n\nSubtotal estimado: ${money(total)}\nEntrega: ${form.get("delivery")}\nNombre: ${form.get("name")}\nLocalidad: ${form.get("area")}\nContacto: ${form.get("phone")}\n\n¿Me confirman stock, costo de envío y forma de pago?`;const phone=(window.AIBAZAR_WHATSAPP||"").replace(/\D/g,"");if(!phone){const blob=new Blob([msg],{type:"text/plain"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="pedido-aibazar.txt";a.click();URL.revokeObjectURL(url);toast("Pedido de prueba descargado. Configurá tu WhatsApp para enviar pedidos.");return}window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank","noopener");});
 let installPrompt;const installBtn=document.querySelector("#installBtn");window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;installBtn.classList.remove("hidden")});installBtn.addEventListener("click",async()=>{if(!installPrompt){toast("Usá el menú del navegador: Agregar a pantalla de inicio");return}installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installBtn.classList.add("hidden")});
 if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+document.querySelector("#productSearch").addEventListener("input", e => {
+  searchTerm = e.target.value.trim();
+  renderProducts();
+});
 renderFilters();renderProducts();renderCart();
