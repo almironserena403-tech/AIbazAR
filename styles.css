@@ -157,3 +157,100 @@ select:focus-visible {
     animation-duration: .01ms !important;
   }
 }
+/* AIBAZAR - SECCION DE PROMOCIONES */
+
+.promo-section {
+  max-width: 1240px;
+  margin: 15px auto 55px;
+  padding: 35px 24px;
+}
+
+.promo-heading {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.promo-heading h2 {
+  font: 800 clamp(1.6rem, 3vw, 2.3rem) Manrope, sans-serif;
+  color: var(--plum);
+  margin: 10px 0;
+}
+
+.promo-heading p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.promo-card {
+  min-height: 220px;
+  padding: 25px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid #f5d5e3;
+  box-shadow: 0 8px 25px rgba(88, 19, 61, .06);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(88, 19, 61, .12);
+}
+
+.promo-beauty {
+  background: linear-gradient(135deg, #fff0f6, #ffd6e7);
+}
+
+.promo-accessories {
+  background: linear-gradient(135deg, #fff7fb, #f8dff0);
+}
+
+.promo-favorites {
+  background: linear-gradient(135deg, #fff1f4, #ffe2dc);
+}
+
+.promo-icon {
+  font-size: 2.6rem;
+}
+
+.promo-label {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: var(--pink);
+}
+
+.promo-card strong {
+  font: 800 1.2rem Manrope, sans-serif;
+  color: var(--plum);
+}
+
+.promo-link {
+  color: var(--plum);
+  font-size: .85rem;
+  font-weight: 800;
+}
+
+@media (max-width: 700px) {
+  .promo-section {
+    padding: 25px 15px;
+  }
+
+  .promo-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .promo-card {
+    min-height: 175px;
+  }
+}
