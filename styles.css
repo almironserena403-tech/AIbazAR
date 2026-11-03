@@ -254,3 +254,71 @@ select:focus-visible {
     min-height: 175px;
   }
 }
+/* AIBAZAR - TARJETAS DE PRODUCTOS ESTILO MARKETPLACE */
+
+.product-card {
+  border: 1px solid #f2dce7;
+  border-radius: 18px;
+  box-shadow: 0 5px 18px rgba(88, 19, 61, .07);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(88, 19, 61, .14);
+}
+
+.product-art {
+  background: linear-gradient(145deg, #fff4f8, #ffe1ed);
+  min-height: 190px;
+}
+
+.product-art .tag {
+  background: #f43f85;
+  color: #fff;
+  padding: 7px 11px;
+  box-shadow: 0 3px 10px #f43f8540;
+}
+
+.product-info {
+  padding: 17px;
+}
+
+.product-info h3 {
+  font-size: 1.02rem;
+  font-weight: 800;
+}
+
+.price {
+  font-size: 1.4rem;
+  color: #f43f85;
+}
+
+.old-price {
+  font-size: .85rem;
+  color: #a994a0;
+}
+
+.add-button {
+  background: #f43f85;
+  color: #fff;
+  border-radius: 12px;
+  padding: 13px;
+  font-weight: 800;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.add-button:hover {
+  background: #d92d70;
+  transform: scale(1.02);
+}
+
+@media (max-width: 620px) {
+  .product-art {
+    min-height: 145px;
+  }
+
+  .product-info {
+    padding: 12px;
+  }
+}
