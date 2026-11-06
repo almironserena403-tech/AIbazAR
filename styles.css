@@ -535,3 +535,21 @@ select:focus-visible {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+/* ICONOS DE CONFIANZA */
+
+.trust-item svg {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #f43f85;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
