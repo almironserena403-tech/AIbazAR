@@ -322,3 +322,48 @@ select:focus-visible {
     padding: 12px;
   }
 }
+/* AIBAZAR - BUSCADOR ESTILO MARKETPLACE */
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 620px;
+  margin: 8px 0 20px;
+  padding: 0 17px;
+  min-height: 56px;
+  background: #fff;
+  border: 1px solid #f1ccdc;
+  border-radius: 16px;
+  color: var(--pink);
+  box-shadow: 0 6px 18px rgba(88, 19, 61, .06);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.search-box:focus-within {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 4px rgba(244, 63, 133, .10);
+}
+
+.search-box input {
+  width: 100%;
+  min-width: 0;
+  padding: 15px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--plum);
+  font-size: .95rem;
+}
+
+.search-box input::placeholder {
+  color: #b18a9e;
+}
+
+@media (max-width: 620px) {
+  .search-box {
+    max-width: 100%;
+    min-height: 52px;
+    border-radius: 14px;
+  }
+}
