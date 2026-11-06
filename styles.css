@@ -398,3 +398,66 @@ select:focus-visible {
     border-radius: 14px;
   }
 }
+/* AIBAZAR - BANNERS PREMIUM */
+
+.promo-section {
+  padding-top: 45px;
+  padding-bottom: 60px;
+}
+
+.promo-heading h2 {
+  letter-spacing: -1px;
+}
+
+.promo-card {
+  position: relative;
+  min-height: 245px;
+  padding: 28px;
+  border: 1px solid rgba(244, 63, 133, .13);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(88, 19, 61, .07);
+}
+
+.promo-card::after {
+  content: "✦";
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+  font-size: 6rem;
+  color: rgba(244, 63, 133, .10);
+  pointer-events: none;
+}
+
+.promo-icon {
+  font-size: 3rem;
+  margin-bottom: 5px;
+}
+
+.promo-card strong {
+  max-width: 230px;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.promo-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 9px 14px;
+  background: white;
+  border-radius: 30px;
+  font-size: .8rem;
+  box-shadow: 0 4px 12px rgba(88, 19, 61, .06);
+}
+
+.promo-card:hover .promo-link {
+  background: var(--pink);
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .promo-card {
+    min-height: 190px;
+    padding: 23px;
+  }
+}
