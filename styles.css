@@ -322,24 +322,55 @@ select:focus-visible {
     padding: 12px;
   }
 }
-/* AIBAZAR - BUSCADOR ESTILO MARKETPLACE */
+/* AIBAZAR - BUSCADOR CORREGIDO */
 
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  max-width: 620px;
-  margin: 8px 0 20px;
-  padding: 0 17px;
-  min-height: 56px;
-  background: #fff;
-  border: 1px solid #f1ccdc;
-  border-radius: 16px;
-  color: var(--pink);
-  box-shadow: 0 6px 18px rgba(88, 19, 61, .06);
-  transition: border-color .2s ease, box-shadow .2s ease;
+.catalog-section .search-box {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 620px !important;
+  min-height: 56px !important;
+  margin: 8px 0 22px !important;
+  padding: 0 18px !important;
+  background-color: #ffffff !important;
+  border: 1px solid #f1ccdc !important;
+  border-radius: 18px !important;
+  box-shadow: 0 5px 18px rgba(88, 19, 61, 0.07) !important;
+  color: #f43f85 !important;
 }
 
+.catalog-section .search-box input {
+  display: block !important;
+  flex: 1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 52px !important;
+  padding: 0 10px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #58133d !important;
+  font-size: 15px !important;
+}
+
+.catalog-section .search-box input::placeholder {
+  color: #b18a9e !important;
+  opacity: 1 !important;
+}
+
+.catalog-section .search-box:focus-within {
+  border-color: #f43f85 !important;
+  box-shadow: 0 0 0 3px rgba(244, 63, 133, 0.12) !important;
+}
+
+@media (max-width: 620px) {
+  .catalog-section .search-box {
+    max-width: 100% !important;
+    min-height: 52px !important;
+  }
+}
 .search-box:focus-within {
   border-color: var(--pink);
   box-shadow: 0 0 0 4px rgba(244, 63, 133, .10);
