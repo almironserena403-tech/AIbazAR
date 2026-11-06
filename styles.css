@@ -553,3 +553,46 @@ select:focus-visible {
   align-items: center;
   gap: 9px;
 }
+/* AIBAZAR - BANNERS CON FOTOGRAFIAS */
+
+.promo-card {
+  position: relative;
+  background-size: cover !important;
+  background-position: center !important;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.promo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 248, 251, .96) 0%,
+    rgba(255, 248, 251, .82) 48%,
+    rgba(255, 248, 251, .12) 100%
+  );
+}
+
+.promo-beauty {
+  background-image: url("./banner-belleza.jpg") !important;
+}
+
+.promo-accessories {
+  background-image: url("./banner-accesorios.jpg") !important;
+}
+
+.promo-favorites {
+  background-image: url("./banner-favoritos.jpg") !important;
+}
+
+.promo-icon {
+  display: none !important;
+}
+
+.promo-card > * {
+  position: relative;
+  z-index: 1;
+}
